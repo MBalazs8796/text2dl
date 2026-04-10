@@ -1,0 +1,7 @@
+src/config.py
+
+.venv/
+__pycache__/
+*.pyc
+
+cache/
