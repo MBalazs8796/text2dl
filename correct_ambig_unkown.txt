@@ -1,0 +1,11 @@
+Ambig:
+
+Correct count: 26
+Incorrect count: 4
+Incorrect index: 1, 8, 13, 24, 29
+
+Mapping:
+
+Correct count: 28
+Incorrect count: 2
+Incorrect index: 8, 29

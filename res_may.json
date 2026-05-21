@@ -1,0 +1,2130 @@
+[
+ {
+  "Question": "Give me a scientist who authored 100 scientific articles or more.",
+  "Unary": [
+   {
+    "human": [
+     "Q5",
+     "Useful: scientists are humans (domain restriction for the answer variable)"
+    ]
+   },
+   {
+    "scientist_occupation": [
+     "Q901",
+     "Useful: Wikidata item for the occupation 'scientist' (used with P106 occupation)"
+    ]
+   },
+   {
+    "scholarly_article": [
+     "Q13442814",
+     "Useful: approximates 'scientific article' as a Wikidata class for counting authored works"
+    ]
+   },
+   {
+    "university": [
+     "Q3918",
+     "Irrelevant/distractor: educational institutions are not asked for"
+    ]
+   },
+   {
+    "physicist_occupation": [
+     "Q169470",
+     "Irrelevant/distractor: a specific type of scientist, not required by the question"
+    ]
+   },
+   {
+    "book": [
+     "Q571",
+     "Irrelevant/distractor: another type of work, not what is being counted"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "occupation": [
+     "P106",
+     "Useful: links a person to their occupation (to express 'scientist')"
+    ]
+   },
+   {
+    "author": [
+     "P50",
+     "Useful: links a work to its author (used to express 'authored')"
+    ]
+   },
+   {
+    "educated_at": [
+     "P69",
+     "Irrelevant/distractor: not requested"
+    ]
+   },
+   {
+    "award_received": [
+     "P166",
+     "Irrelevant/distractor: not requested"
+    ]
+   },
+   {
+    "published_in": [
+     "P1433",
+     "Irrelevant/distractor: venue of publication is not requested"
+    ]
+   },
+   {
+    "main_subject": [
+     "P921",
+     "Irrelevant/distractor: topic constraints are not requested"
+    ]
+   }
+  ],
+  "Mapping": {
+   "Give me a scientist": "human(x) \u2227 occupation(x, Q901)",
+   "who authored": "\u2203y (author(y, x))",
+   "100 scientific articles or more": "\u2265100 y (scholarly_article(y) \u2227 author(y, x))"
+  }
+ },
+ {
+  "Question": "Give me a person who has more than 10 friends.",
+  "Unary": [
+   {
+    "human": [
+     "Q5",
+     "Expresses that the answer should be a person (human)."
+    ]
+   },
+   {
+    "musician": [
+     "Q639669",
+     "Irrelevant distractor class (a type of human, not required by the question)."
+    ]
+   },
+   {
+    "politician": [
+     "Q82955",
+     "Irrelevant distractor class (not required by the question)."
+    ]
+   },
+   {
+    "male": [
+     "Q6581097",
+     "Irrelevant distractor (gender not required by the question)."
+    ]
+   },
+   {
+    "friend": [
+     "Q17297777",
+     "Added manually."
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "significant person (friend)": [
+     "P3342",
+     "Used as the closest Wikidata relation to approximate 'friend' / socially significant relation between two people (can be combined symmetrically to better match 'friends')."
+    ]
+   },
+   {
+    "spouse": [
+     "P26",
+     "Irrelevant distractor relation (not required by the question)."
+    ]
+   },
+   {
+    "sibling": [
+     "P3373",
+     "Irrelevant distractor relation (not required by the question)."
+    ]
+   },
+   {
+    "country of citizenship": [
+     "P27",
+     "Irrelevant distractor relation (not required by the question)."
+    ]
+   },
+   {
+    "educated at": [
+     "P69",
+     "Irrelevant distractor relation (not required by the question)."
+    ]
+   }
+  ],
+  "Mapping": {
+   "a person": "human(x)",
+   "has more than 10 friends": ">10 y: human(y) \u2227 significant_person(x,y) \u2227 significant_person(y,x)"
+  }
+ },
+ {
+  "Question": "Give me a firefighter who has put out more than one fire.",
+  "Unary": [
+   {
+    "human": [
+     "Q5",
+     "Useful domain constraint: the answer is a person"
+    ]
+   },
+   {
+    "firefighter": [
+     "Q107002",
+     "Captures the class/role 'firefighter' (used with occupation)"
+    ]
+   },
+   {
+    "fire": [
+     "Q3196",
+     "Captures the class of events/phenomena 'fire' that can be participated in (proxy for 'fires put out')"
+    ]
+   },
+   {
+    "police officer": [
+     "Q105839",
+     "Irrelevant distractor class"
+    ]
+   },
+   {
+    "mountain": [
+     "Q8502",
+     "Irrelevant distractor class"
+    ]
+   },
+   {
+    "end": [
+     "Q12769393",
+     "Added manually"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "occupation": [
+     "P106",
+     "Connects a person to their occupation; used to express 'firefighter'"
+    ]
+   },
+   {
+    "participant in": [
+     "P1344",
+     "Connects an agent to an event; used to approximate 'has put out (was involved in extinguishing) a fire'"
+    ]
+   },
+   {
+    "place of birth": [
+     "P19",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "sex or gender": [
+     "P21",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "member of": [
+     "P463",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "Give me a": "exists x",
+   "firefighter": "human(x) AND occupation(x, firefighter)",
+   "has put out": "participant in(x, f)  (interpreted as involvement in the fire event as a proxy for extinguishing)",
+   "more than one fire": ">1 f : (fire(f) AND participant in(x, f))"
+  }
+ },
+ {
+  "Question": "Give me a person who has suffered more than 4 accidents.",
+  "Unary": [
+   {
+    "person": [
+     "Q5",
+     "Restrict the answer variable to humans/persons"
+    ]
+   },
+   {
+    "accident": [
+     "Q1123613",
+     "Type constraint for events that are accidents"
+    ]
+   },
+   {
+    "road_traffic_accident": [
+     "Q11874390",
+     "Irrelevant distractor (a specific kind of accident, not required by the question)"
+    ]
+   },
+   {
+    "musician": [
+     "Q639669",
+     "Irrelevant distractor (occupation not asked for)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "significant_event": [
+     "P793",
+     "Links a person to notable events in their life; can include accidents"
+    ]
+   },
+   {
+    "instance_of": [
+     "P31",
+     "Allows typing an event as an accident via (event instance_of accident)"
+    ]
+   },
+   {
+    "place_of_birth": [
+     "P19",
+     "Irrelevant distractor (birthplace not asked for)"
+    ]
+   },
+   {
+    "award_received": [
+     "P166",
+     "Irrelevant distractor (awards not asked for)"
+    ]
+   },
+   {
+    "spouse": [
+     "P26",
+     "Irrelevant distractor (marital relation not asked for)"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a person": "person(x)",
+   "has suffered": "significant_event(x,e)",
+   "accidents": "accident(e)  (optionally realized as instance_of(e, accident))",
+   "more than 4": ">4 e: (significant_event(x,e) \u2227 accident(e))"
+  }
+ },
+ {
+  "Question": "Give me someone that is followed by at least 100 people.",
+  "Unary": [
+   {
+    "human": [
+     "Q5",
+     "Restricts the answer to someone (a human individual)"
+    ]
+   },
+   {
+    "politician": [
+     "Q82955",
+     "Irrelevant distractor class (not required by the question)"
+    ]
+   },
+   {
+    "musician": [
+     "Q639669",
+     "Irrelevant distractor class (not required by the question)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "number_of_followers": [
+     "P8687",
+     "Gives a follower count; enables the 'followed by at least 100 people' constraint via a numeric comparison"
+    ]
+   },
+   {
+    "country_of_citizenship": [
+     "P27",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "educated_at": [
+     "P69",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "spouse": [
+     "P26",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "someone": "human(x)",
+   "followed by at least 100 people": "\u2203n (number_of_followers(x,n) \u2227 n>=100)"
+  }
+ },
+ {
+  "Question": "Give me an author who has created at least 10 original characters.",
+  "Unary": [
+   {
+    "human": [
+     "Q5",
+     "Used to restrict the answer variable to people"
+    ]
+   },
+   {
+    "fictional_character": [
+     "Q95074",
+     "Used to model 'characters' (Wikidata commonly types characters as fictional characters)"
+    ]
+   },
+   {
+    "author_occupation": [
+     "Q482980",
+     "Used to model 'author' as an occupation value"
+    ]
+   },
+   {
+    "comic_book_character": [
+     "Q1114461",
+     "Irrelevant distractor class (a narrower character type not required by the question)"
+    ]
+   },
+   {
+    "city": [
+     "Q515",
+     "Irrelevant distractor class (not used in the question)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "instance_of": [
+     "P31",
+     "Used to assert that something (e.g., a character) is an instance of a class"
+    ]
+   },
+   {
+    "occupation": [
+     "P106",
+     "Used to link a person to the occupation 'author'"
+    ]
+   },
+   {
+    "creator": [
+     "P170",
+     "Used to express 'has created' (link from a created entity to its creator)"
+    ]
+   },
+   {
+    "place_of_birth": [
+     "P19",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "award_received": [
+     "P166",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "characters_in_work": [
+     "P674",
+     "Irrelevant distractor relation (work -> character, not needed for creator counting)"
+    ]
+   }
+  ],
+  "Mapping": {
+   "an author": "human(x) \u2227 occupation(x, author_occupation)",
+   "has created": "creator(y, x)",
+   "original characters": "instance_of(y, fictional_character)  (approximation: Wikidata does not directly encode 'original' without needing negation; we model characters as fictional characters created by x)",
+   "at least 10": "\u2203\u226510 y : instance_of(y, fictional_character) \u2227 creator(y, x)"
+  }
+ },
+ {
+  "Question": "Give me a dog that has learned 4 tricks.",
+  "Unary": [
+   {
+    "dog": [
+     "Q144",
+     "Domestic dog; captures 'a dog'"
+    ]
+   },
+   {
+    "skill_or_trick": [
+     "Q205587",
+     "Skill; used as a proxy for 'trick' (Wikidata has no dedicated universal 'learned trick' class)"
+    ]
+   },
+   {
+    "cat": [
+     "Q146",
+     "Irrelevant distractor class"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Irrelevant distractor class"
+    ]
+   },
+   {
+    "sport": [
+     "Q349",
+     "Irrelevant distractor class"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "has_characteristic": [
+     "P1552",
+     "Generic link from an entity to a characteristic/ability; used to approximate 'has learned'"
+    ]
+   },
+   {
+    "instance_of": [
+     "P31",
+     "Irrelevant (not needed if unary predicates are treated as class-membership), included as a distractor"
+    ]
+   },
+   {
+    "sex_or_gender": [
+     "P21",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "located_in_the_administrative_territorial_entity": [
+     "P131",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a dog": "dog(x)",
+   "has learned 4 tricks": "=4 { y | has_characteristic(x,y) AND skill_or_trick(y) }",
+   "Give me": "return x"
+  }
+ },
+ {
+  "Question": "Give me an object that has been picked up by less than 7 people.",
+  "Unary": [
+   {
+    "physical object": [
+     "Q223557",
+     "Covers the requested 'object' (a tangible thing)"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Covers 'people'"
+    ]
+   },
+   {
+    "artifact": [
+     "Q8205328",
+     "Irrelevant distractor type (still a Wikidata class)"
+    ]
+   },
+   {
+    "book": [
+     "Q571",
+     "Irrelevant distractor type (still a Wikidata class)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "owned by": [
+     "P127",
+     "Used as a Wikidata-available proxy for 'picked up by' via possession/ownership by a person"
+    ]
+   },
+   {
+    "located in": [
+     "P276",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "country of origin": [
+     "P495",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "creator": [
+     "P170",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "an object": "physical object(x)",
+   "picked up by": "owned by(x,y) \u2227 human(y)",
+   "less than 7 people": "<7 y : (owned by(x,y) \u2227 human(y))"
+  }
+ },
+ {
+  "Question": "Give me a painting that has at least 6 colors.",
+  "Unary": [
+   {
+    "painting": [
+     "Q3305213",
+     "Restricts the answer entity to be a painting"
+    ]
+   },
+   {
+    "color": [
+     "Q1075",
+     "Constrains the values counted as colors to be instances of (the concept) color"
+    ]
+   },
+   {
+    "museum": [
+     "Q33506",
+     "Irrelevant distractor class (not required by the question)"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Irrelevant distractor class (not required by the question)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "has color": [
+     "P462",
+     "Expresses that something has a color; used to count how many colors a painting has"
+    ]
+   },
+   {
+    "creator": [
+     "P170",
+     "Irrelevant distractor relation (not required by the question)"
+    ]
+   },
+   {
+    "depicts": [
+     "P180",
+     "Irrelevant distractor relation (not required by the question)"
+    ]
+   },
+   {
+    "inception": [
+     "P571",
+     "Irrelevant distractor relation (not required by the question)"
+    ]
+   },
+   {
+    "collection": [
+     "P195",
+     "Irrelevant distractor relation (not required by the question)"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a painting": "painting(x)",
+   "has at least 6 colors": "\u22656 c ( has color(x,c) \u2227 color(c) )"
+  }
+ },
+ {
+  "Question": "Give me a boardgame with over 20 rules.",
+  "Unary": [
+   {
+    "BoardGame": [
+     "Q131436",
+     "Wikidata class for 'board game'; restricts the answer to board games"
+    ]
+   },
+   {
+    "Rule": [
+     "Q108707",
+     "Wikidata item for 'rule'; used to model each rule as an entity that can be counted"
+    ]
+   },
+   {
+    "CardGame": [
+     "Q131444",
+     "Irrelevant distractor class (card game)"
+    ]
+   },
+   {
+    "VideoGame": [
+     "Q7889",
+     "Irrelevant distractor class (video game)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "instanceOf": [
+     "P31",
+     "Connect an entity to its class (e.g., x instanceOf BoardGame)"
+    ]
+   },
+   {
+    "hasPart": [
+     "P527",
+     "Used to link a board game to its constituent parts; here used to represent that a game 'has' rules"
+    ]
+   },
+   {
+    "partOf": [
+     "P361",
+     "Irrelevant distractor relation (part of)"
+    ]
+   },
+   {
+    "countryOfOrigin": [
+     "P495",
+     "Irrelevant distractor relation (country of origin)"
+    ]
+   },
+   {
+    "publicationDate": [
+     "P577",
+     "Irrelevant distractor relation (publication date)"
+    ]
+   },
+   {
+    "creator": [
+     "P170",
+     "Irrelevant distractor relation (creator)"
+    ]
+   },
+   {
+    "minNumberOfPlayers": [
+     "P1872",
+     "Irrelevant distractor relation (minimum number of players)"
+    ]
+   },
+   {
+    "maxNumberOfPlayers": [
+     "P1873",
+     "Irrelevant distractor relation (maximum number of players)"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a boardgame": "instanceOf(x, BoardGame)",
+   "with over 20 rules": ">20 y: (hasPart(x, y) \u2227 instanceOf(y, Rule))"
+  }
+ },
+ {
+  "Question": "Give me a detective that has failed to solve 4 cases.",
+  "Unary": [
+   {
+    "human": [
+     "Q5",
+     "Detectives are people; useful to restrict the answer variable to humans"
+    ]
+   },
+   {
+    "detective": [
+     "Q2306091",
+     "Use as the value for occupation to express that someone is a detective"
+    ]
+   },
+   {
+    "cold case": [
+     "Q1091380",
+     "Models an unsolved criminal case; used to approximate 'failed to solve a case' without needing negation"
+    ]
+   },
+   {
+    "crime": [
+     "Q83267",
+     "Optional strengthening of 'case' as a crime-related entity (not strictly required if using cold case)"
+    ]
+   },
+   {
+    "male": [
+     "Q6581097",
+     "Irrelevant distractor class (can be used with gender but not needed for the question)"
+    ]
+   },
+   {
+    "failure": [
+     "Q1121708",
+     "Added manually"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "occupation": [
+     "P106",
+     "Connects a person to their occupation (detective)"
+    ]
+   },
+   {
+    "participant in": [
+     "P1344",
+     "Connects the detective to cases/events they took part in (used as a stand-in for 'worked on/investigated')"
+    ]
+   },
+   {
+    "instance of": [
+     "P31",
+     "Types a case as a cold case (unsolved), approximating 'failed to solve'"
+    ]
+   },
+   {
+    "gender": [
+     "P21",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "country of citizenship": [
+     "P27",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "award received": [
+     "P166",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a detective": "human(x) \u2227 occupation(x, detective)",
+   "has failed to solve 4 cases": "(=4 y) [ participant in(x, y) \u2227 instance of(y, cold case) ]",
+   "cases": "instance of(y, cold case) (optionally also: crime(y))"
+  }
+ },
+ {
+  "Question": "Give me a serving of ice cream that contains over 6 scoops of ice cream.",
+  "Unary": [
+   {
+    "food_portion": [
+     "Q1564251",
+     "Use as a proxy for a 'serving' / portion of food"
+    ]
+   },
+   {
+    "ice_cream": [
+     "Q13233",
+     "Express that something is (a kind of) ice cream"
+    ]
+   },
+   {
+    "dessert": [
+     "Q182274",
+     "Irrelevant distractor: many ice creams are desserts, but not needed for the query"
+    ]
+   },
+   {
+    "gelato": [
+     "Q101475",
+     "Irrelevant distractor: specific subtype of ice cream, not required"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "has_part": [
+     "P527",
+     "Use to express 'contains' via 'has part' relations"
+    ]
+   },
+   {
+    "ingredient": [
+     "P186",
+     "Irrelevant distractor: ingredients are not the same as having multiple scoops as parts"
+    ]
+   },
+   {
+    "country_of_origin": [
+     "P495",
+     "Irrelevant distractor: origin not asked"
+    ]
+   },
+   {
+    "manufacturer": [
+     "P176",
+     "Irrelevant distractor: producer not asked"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a serving": "food_portion(x)",
+   "of ice cream": "ice_cream(x)",
+   "contains": "has_part(x,y)",
+   "over 6 scoops of ice cream": ">6 has_part(x,y) \u2227 food_portion(y) \u2227 ice_cream(y)"
+  }
+ },
+ {
+  "Question": "Give me a course that more than 200 people failed.",
+  "Unary": [
+   {
+    "course": [
+     "Q189533",
+     "Educational course; target entity type to return"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Type for the people who (allegedly) failed"
+    ]
+   },
+   {
+    "examination": [
+     "Q1062579",
+     "Model a course-failure as an assessment/exam event linked to the course and to participants"
+    ]
+   },
+   {
+    "failure": [
+     "Q47912",
+     "Represents the (failed) outcome/quality for an assessment attempt"
+    ]
+   },
+   {
+    "university": [
+     "Q3918",
+     "Irrelevant distractor type (institution)"
+    ]
+   },
+   {
+    "book": [
+     "Q571",
+     "Irrelevant distractor type (publication)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "instance_of": [
+     "P31",
+     "Standard typing relation (e.g., course(x), human(y), examination(e))"
+    ]
+   },
+   {
+    "part_of": [
+     "P361",
+     "Link an exam/assessment event to the course it belongs to"
+    ]
+   },
+   {
+    "participant": [
+     "P710",
+     "Link an exam/assessment event to participating people"
+    ]
+   },
+   {
+    "has_quality": [
+     "P1552",
+     "Attach an outcome/quality such as failure to an event/attempt"
+    ]
+   },
+   {
+    "educated_at": [
+     "P69",
+     "Irrelevant distractor relation (education history)"
+    ]
+   },
+   {
+    "located_in_administrative_territorial_entity": [
+     "P131",
+     "Irrelevant distractor relation (location)"
+    ]
+   },
+   {
+    "author": [
+     "P50",
+     "Irrelevant distractor relation (works/authorship)"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a course": "course(x)  (i.e., instance_of(x, Q189533))",
+   "people": "human(y)  (i.e., instance_of(y, Q5))",
+   "failed": "\u2203e [ examination(e) \u2227 part_of(e, x) \u2227 participant(e, y) \u2227 has_quality(e, failure) ]",
+   "more than 200": "(>200 y) such that human(y) \u2227 \u2203e [ examination(e) \u2227 part_of(e, x) \u2227 participant(e, y) \u2227 has_quality(e, failure) ]"
+  }
+ },
+ {
+  "Question": "Give me a closet with 15 different kinds of clothes.",
+  "Unary": [
+   {
+    "closet_or_wardrobe": [
+     "Q180656",
+     "Use as the target entity type (closet/wardrobe as furniture)"
+    ]
+   },
+   {
+    "clothing": [
+     "Q11460",
+     "Use as the general class that clothing kinds should fall under"
+    ]
+   },
+   {
+    "building_(irrelevant)": [
+     "Q41176",
+     "Distractor; not needed to answer the question"
+    ]
+   },
+   {
+    "fashion_(irrelevant)": [
+     "Q12684",
+     "Distractor; related topic but not required"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "has_part": [
+     "P527",
+     "Model that a closet/wardrobe has clothing items among its contents/parts"
+    ]
+   },
+   {
+    "instance_of": [
+     "P31",
+     "Relate a concrete clothing item to its kind/type"
+    ]
+   },
+   {
+    "subclass_of": [
+     "P279",
+     "Ensure the 'kind/type' counted is a kind of clothing"
+    ]
+   },
+   {
+    "made_of_(irrelevant)": [
+     "P186",
+     "Distractor; material is not asked for"
+    ]
+   },
+   {
+    "color_(irrelevant)": [
+     "P462",
+     "Distractor; color is not asked for"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a closet": "closet_or_wardrobe(x)",
+   "with 15 different kinds of clothes": ">=15 DISTINCT t : (subclass_of(t, clothing) AND EXISTS y : (has_part(x, y) AND instance_of(y, t)))"
+  }
+ },
+ {
+  "Question": "Give me a kitchen that contains 5 unwashed plates.",
+  "Unary": [
+   {
+    "kitchen": [
+     "Q43164",
+     "Expresses the target entity type: a kitchen"
+    ]
+   },
+   {
+    "plate": [
+     "Q57216",
+     "Expresses the object type to be contained: plate"
+    ]
+   },
+   {
+    "dirty": [
+     "Q178091",
+     "Used as an approximation for 'unwashed' via a positive, expressible state/quality (unwashed \u2192 dirty/not clean)"
+    ]
+   },
+   {
+    "dishwasher": [
+     "Q5717",
+     "Irrelevant distractor class (kitchen-related but not required)"
+    ]
+   },
+   {
+    "cup": [
+     "Q81727",
+     "Irrelevant distractor class"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "location": [
+     "P276",
+     "Used to model containment/being in a place: a plate located in a kitchen"
+    ]
+   },
+   {
+    "has_part": [
+     "P527",
+     "Alternative way to model containment: a kitchen has part plate(s)"
+    ]
+   },
+   {
+    "has_quality": [
+     "P1552",
+     "Used to attach a quality/state to plates (e.g., dirty \u2248 unwashed)"
+    ]
+   },
+   {
+    "located_in_administrative_territory": [
+     "P131",
+     "Irrelevant distractor relation (not about plates-in-kitchen)"
+    ]
+   },
+   {
+    "color": [
+     "P462",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a kitchen": "kitchen(x)",
+   "contains": "location(y, x)  (i.e., y is located in x)  OR  has_part(x, y)",
+   "5 ... plates": "=5 y (plate(y) AND location(y, x))",
+   "unwashed": "has_quality(y, dirty)"
+  }
+ },
+ {
+  "Question": "Give me a ride that 2 people have fallen off before.",
+  "Unary": [
+   {
+    "amusement_ride": [
+     "Q570116",
+     "Target type for 'a ride' (amusement ride)."
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Used to type the 'people' who fell off."
+    ]
+   },
+   {
+    "accident": [
+     "Q501",
+     "Models the relevant past incident as an accident/event connected to the ride."
+    ]
+   },
+   {
+    "accidental_fall": [
+     "Q1137809",
+     "Models the 'fallen off' aspect as an (accidental) fall cause for the accident."
+    ]
+   },
+   {
+    "roller_coaster": [
+     "Q11446",
+     "Irrelevant/distractor: a specific kind of ride, not required by the question."
+    ]
+   },
+   {
+    "theme_park": [
+     "Q116748",
+     "Irrelevant/distractor: location/setting, not required by the question."
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "significant_event": [
+     "P793",
+     "Connects the ride to a recorded event (e.g., an accident) that happened involving it ('before' via existence of a past event)."
+    ]
+   },
+   {
+    "participant": [
+     "P710",
+     "Connects an event/accident to the humans involved; supports counting '2 people'."
+    ]
+   },
+   {
+    "has_cause": [
+     "P828",
+     "Connects the accident/event to a cause such as an accidental fall (approximates 'fallen off')."
+    ]
+   },
+   {
+    "number_of_deaths": [
+     "P1120",
+     "Irrelevant/distractor (or alternate modeling): could count deaths in an accident, but the question asks fallen off, not necessarily deaths."
+    ]
+   },
+   {
+    "operator": [
+     "P137",
+     "Irrelevant/distractor: who operates the ride is not asked."
+    ]
+   },
+   {
+    "manufacturer": [
+     "P176",
+     "Irrelevant/distractor: who made the ride is not asked."
+    ]
+   },
+   {
+    "located_in_administrative_territorial_entity": [
+     "P131",
+     "Irrelevant/distractor: where the ride is located is not asked."
+    ]
+   }
+  ],
+  "Mapping": {
+   "a ride": "amusement_ride(x)",
+   "have fallen off": "\u2203e [ significant_event(x,e) \u2227 accident(e) \u2227 has_cause(e, accidental_fall) ]",
+   "2 people": "\u2203e [ (=2 participant(e,y)) \u2227 human(y) ]",
+   "before": "\u2203e [ significant_event(x,e) ]"
+  }
+ },
+ {
+  "Question": "Give me a dance that can be performed by more than 50 people.",
+  "Unary": [
+   {
+    "dance": [
+     "Q11639",
+     "Wikidata item for the class/concept 'dance'"
+    ]
+   },
+   {
+    "dance_company": [
+     "Q122503",
+     "A dance can be linked to a performing group (dance company)"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Represents 'people' (included as a potentially useful type constraint)"
+    ]
+   },
+   {
+    "folk_dance": [
+     "Q26300",
+     "Irrelevant distractor class (a subtype of dance)"
+    ]
+   },
+   {
+    "ballet": [
+     "Q194804",
+     "Irrelevant distractor class (a dance form/genre)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "performer": [
+     "P175",
+     "Links a work/performance-related item to its performer; used to connect a dance to a performing group"
+    ]
+   },
+   {
+    "number_of_members": [
+     "P2124",
+     "Allows expressing the size of the performing group and comparing it to a threshold (>50)"
+    ]
+   },
+   {
+    "country_of_origin": [
+     "P495",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "genre": [
+     "P136",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "part_of": [
+     "P361",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a dance": "dance(x)",
+   "can be performed": "\u2203g (performer(g, x))",
+   "by more than 50 people": "\u2203g (dance_company(g) \u2227 performer(g, x) \u2227 number_of_members(g) > 50)"
+  }
+ },
+ {
+  "Question": "Give me a book with over 500 pages.",
+  "Unary": [
+   {
+    "book": [
+     "Q571",
+     "Express that the item is a book"
+    ]
+   },
+   {
+    "written work": [
+     "Q47461344",
+     "Irrelevant distractor: broader class of works, not required by the question"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Irrelevant distractor: people, not asked for"
+    ]
+   },
+   {
+    "film": [
+     "Q11424",
+     "Irrelevant distractor: not a book"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "number of pages": [
+     "P1104",
+     "Express the page count of a book; enables constraint > 500"
+    ]
+   },
+   {
+    "author": [
+     "P50",
+     "Irrelevant distractor: authorship is not requested"
+    ]
+   },
+   {
+    "publication date": [
+     "P577",
+     "Irrelevant distractor: publication time not requested"
+    ]
+   },
+   {
+    "genre": [
+     "P136",
+     "Irrelevant distractor: genre not requested"
+    ]
+   },
+   {
+    "language of work or name": [
+     "P407",
+     "Irrelevant distractor: language not requested"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a book": "book(x)",
+   "with over 500 pages": "\u2203n (number of pages(x,n) \u2227 n > 500)"
+  }
+ },
+ {
+  "Question": "Give me a train ride that has more than 10 stops.",
+  "Unary": [
+   {
+    "railway_line": [
+     "Q728937",
+     "Express a train ride as a rail line/route that one can travel on"
+    ]
+   },
+   {
+    "railway_station": [
+     "Q55488",
+     "Express a stop as a (railway) station"
+    ]
+   },
+   {
+    "train": [
+     "Q870",
+     "Distractor: a train vehicle, not necessarily a ride/route with stops"
+    ]
+   },
+   {
+    "bus_stop": [
+     "Q953806",
+     "Distractor: a stop type not specific to train rides"
+    ]
+   },
+   {
+    "airport": [
+     "Q1248784",
+     "Distractor: unrelated transport infrastructure"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "has_part": [
+     "P527",
+     "Connect a railway line/route to its component stations (used as stops)"
+    ]
+   },
+   {
+    "terminus": [
+     "P559",
+     "Distractor/optional: endpoints of a line; not needed to express 'more than 10 stops'"
+    ]
+   },
+   {
+    "operator": [
+     "P137",
+     "Distractor: who operates the line/service"
+    ]
+   },
+   {
+    "located_in_administrative_territorial_entity": [
+     "P131",
+     "Distractor: geographic containment"
+    ]
+   },
+   {
+    "follows": [
+     "P155",
+     "Distractor: sequence relation between items"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a train ride": "railway_line(x)",
+   "has more than 10 stops": ">10 y (has_part(x,y) & railway_station(y))"
+  }
+ },
+ {
+  "Question": "Give me a paper that is cited by at least 100 different scientists.",
+  "Unary": [
+   {
+    "scholarly_article": [
+     "Q13442814",
+     "Use as the class for 'paper' (a scholarly article)."
+    ]
+   },
+   {
+    "scientist": [
+     "Q901",
+     "Use as the class for 'scientists' (citing agents)."
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Irrelevant distractor: many scientists are humans, but not needed to express the question."
+    ]
+   },
+   {
+    "university": [
+     "Q3918",
+     "Irrelevant distractor: not needed for citation counting."
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "cites": [
+     "P2860",
+     "Core relation: a citing work cites the target paper."
+    ]
+   },
+   {
+    "author": [
+     "P50",
+     "Connect a citing work to the scientist who authored it (used to attribute citations to scientists)."
+    ]
+   },
+   {
+    "published_in": [
+     "P1433",
+     "Irrelevant distractor: venue is not required to answer the question."
+    ]
+   },
+   {
+    "publication_date": [
+     "P577",
+     "Irrelevant distractor: time of publication is not required."
+    ]
+   },
+   {
+    "educated_at": [
+     "P69",
+     "Irrelevant distractor: education is not required."
+    ]
+   }
+  ],
+  "Mapping": {
+   "a paper": "scholarly_article(x)",
+   "cited by": "\u2203w (cites(w, x) \u2227 author(w, y) \u2227 scientist(y))",
+   "at least 100 different scientists": "\u2265100 distinct y: (scientist(y) \u2227 \u2203w (author(w, y) \u2227 cites(w, x)))"
+  }
+ },
+ {
+  "Question": "Give me a food that more than 15 people are allergic to.",
+  "Unary": [
+   {
+    "food": [
+     "Q2095",
+     "Restricts the answer variable to items that are foods"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Models 'people' as humans (instances of human)"
+    ]
+   },
+   {
+    "fruit": [
+     "Q3314483",
+     "Irrelevant distractor class (a kind of food, but not required)"
+    ]
+   },
+   {
+    "vegetable": [
+     "Q11004",
+     "Irrelevant distractor class"
+    ]
+   },
+   {
+    "disease": [
+     "Q12136",
+     "Irrelevant distractor class (not needed for allergies-to relation)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "allergic to": [
+     "P5188",
+     "Connects a person to something they are allergic to (used to express 'people are allergic to [food]')"
+    ]
+   },
+   {
+    "country of origin": [
+     "P495",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "has part": [
+     "P527",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "part of": [
+     "P361",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "has cause": [
+     "P828",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a food": "food(x)",
+   "people": "human(y)",
+   "are allergic to (the food)": "allergic_to(y, x)",
+   "more than 15 people are allergic to": ">15 y : (human(y) \u2227 allergic_to(y, x))"
+  }
+ },
+ {
+  "Question": "Give me a sandwich that contains more than 3 types of vegetables.",
+  "Unary": [
+   {
+    "sandwich": [
+     "Q28803",
+     "Expresses that the returned item is a sandwich"
+    ]
+   },
+   {
+    "vegetable": [
+     "Q11004",
+     "Used to constrain ingredients to be vegetables"
+    ]
+   },
+   {
+    "food": [
+     "Q2095",
+     "Irrelevant/distractor: very broad superclass of sandwich"
+    ]
+   },
+   {
+    "bread": [
+     "Q7802",
+     "Irrelevant/distractor: common component but not required by the question"
+    ]
+   },
+   {
+    "cheese": [
+     "Q10943",
+     "Irrelevant/distractor: common ingredient but not required"
+    ]
+   },
+   {
+    "veganism": [
+     "Q181138",
+     "Irrelevant/distractor: dietary classification not asked for"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "has ingredient": [
+     "P186",
+     "Models 'contains' via ingredient relation between sandwich and ingredient item"
+    ]
+   },
+   {
+    "has part": [
+     "P527",
+     "Irrelevant/distractor alternative to ingredients; not necessary if using P186"
+    ]
+   },
+   {
+    "part of": [
+     "P361",
+     "Irrelevant/distractor: inverse mereology not needed"
+    ]
+   },
+   {
+    "country of origin": [
+     "P495",
+     "Irrelevant/distractor: provenance not asked for"
+    ]
+   },
+   {
+    "located in the administrative territorial entity": [
+     "P131",
+     "Irrelevant/distractor: location not asked for"
+    ]
+   },
+   {
+    "cuisine": [
+     "P2012",
+     "Irrelevant/distractor: cuisine not asked for"
+    ]
+   }
+  ],
+  "Mapping": {
+   "Give me a sandwich": "sandwich(x)",
+   "that contains ... vegetables": "has_ingredient(x,y) \u2227 vegetable(y)",
+   "more than 3 types of vegetables": ">3 y : (has_ingredient(x,y) \u2227 vegetable(y))"
+  }
+ },
+ {
+  "Question": "Give me a plant that requires 3 different environmental factors to be suitable.",
+  "Unary": [
+   {
+    "plant": [
+     "Q756",
+     "Restricts answers to plants"
+    ]
+   },
+   {
+    "habitat": [
+     "Q747074",
+     "Used as a Wikidata-expressible proxy for 'environmental factors/conditions' a plant is suitable for"
+    ]
+   },
+   {
+    "environmental factor": [
+     "Q183536",
+     "Captures the notion 'environmental factor' (may be used in combination with habitat if desired)"
+    ]
+   },
+   {
+    "tree": [
+     "Q10884",
+     "Irrelevant distractor class (a kind of plant, but not required by the question)"
+    ]
+   },
+   {
+    "invasive species": [
+     "Q190002",
+     "Irrelevant distractor class"
+    ]
+   },
+   {
+    "suitability": [
+     "Q25517604",
+     "Manually added"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "habitat (of taxon)": [
+     "P2974",
+     "Connects a plant/taxon to habitats; used to model 'suitable environmental factors/conditions'"
+    ]
+   },
+   {
+    "has quality": [
+     "P1552",
+     "Irrelevant distractor relation (could describe traits like drought tolerance, but not required here)"
+    ]
+   },
+   {
+    "native to": [
+     "P2341",
+     "Irrelevant distractor relation (geographic nativeness is not asked)"
+    ]
+   },
+   {
+    "hardiness zone": [
+     "P3042",
+     "Irrelevant distractor relation (climate suitability detail, not required by the question)"
+    ]
+   }
+  ],
+  "Mapping": {
+   "Give me a plant": "plant(x)",
+   "requires 3 different environmental factors to be suitable": "=3 DISTINCT y : (habitat (of taxon)(x,y) AND habitat(y))"
+  }
+ },
+ {
+  "Question": "Give me a person with less than 2 friends.",
+  "Unary": [
+   {
+    "human": [
+     "Q5",
+     "Expresses that the answer entity is a person (human)."
+    ]
+   },
+   {
+    "musician": [
+     "Q639669",
+     "Irrelevant distractor class (a type of human, but not required by the question)."
+    ]
+   },
+   {
+    "city": [
+     "Q515",
+     "Irrelevant distractor class (not needed for the question)."
+    ]
+   },
+   {
+    "friend": [
+     "Q17297777",
+     "Added manually."
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "significant person / notable associate (proxy for friend)": [
+     "P3342",
+     "Closest Wikidata relation commonly used to link a person to other socially significant people; can serve as a proxy for 'friend' when modeling friendship-like ties."
+    ]
+   },
+   {
+    "spouse": [
+     "P26",
+     "Irrelevant distractor relation (a different social relation, not asked for)."
+    ]
+   },
+   {
+    "educated at": [
+     "P69",
+     "Irrelevant distractor relation (not involved in counting friends)."
+    ]
+   },
+   {
+    "member of": [
+     "P463",
+     "Irrelevant distractor relation (organization membership, not friends)."
+    ]
+   }
+  ],
+  "Mapping": {
+   "a person": "human(x)",
+   "friends": "significant person / notable associate (proxy for friend)(x,y)",
+   "less than 2 friends": "<2 significant person / notable associate (proxy for friend)(x,y)"
+  }
+ },
+ {
+  "Question": "Give me a person who speaks 5 languages.",
+  "Unary": [
+   {
+    "human": [
+     "Q5",
+     "Express that the answer entity is a person (human)"
+    ]
+   },
+   {
+    "language": [
+     "Q34770",
+     "Optional type constraint for the objects of 'languages spoken, written or signed'"
+    ]
+   },
+   {
+    "city": [
+     "Q515",
+     "Irrelevant distractor class"
+    ]
+   },
+   {
+    "musical group": [
+     "Q215380",
+     "Irrelevant distractor class"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "languages spoken, written or signed": [
+     "P1412",
+     "Express that a person speaks a language"
+    ]
+   },
+   {
+    "native language": [
+     "P103",
+     "Irrelevant distractor relation (not required by the question)"
+    ]
+   },
+   {
+    "educated at": [
+     "P69",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "place of birth": [
+     "P19",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "citizenship": [
+     "P27",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a person": "human(x)",
+   "speaks 5 languages": "=5 languages spoken, written or signed(x, l) AND language(l)"
+  }
+ },
+ {
+  "Question": "Give me a choir with over 20 members.",
+  "Unary": [
+   {
+    "choir": [
+     "Q131181",
+     "Express that the returned entity is a choir"
+    ]
+   },
+   {
+    "musical ensemble": [
+     "Q2088357",
+     "Irrelevant distractor: another possible type of music group"
+    ]
+   },
+   {
+    "orchestra": [
+     "Q42998",
+     "Irrelevant distractor: different kind of musical group"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "member count": [
+     "P2124",
+     "Express the number of members of the choir (used with a numeric constraint > 20)"
+    ]
+   },
+   {
+    "country": [
+     "P17",
+     "Irrelevant distractor: location attribute not asked for"
+    ]
+   },
+   {
+    "located in the administrative territorial entity": [
+     "P131",
+     "Irrelevant distractor: geographic containment not asked for"
+    ]
+   },
+   {
+    "inception": [
+     "P571",
+     "Irrelevant distractor: founding/starting date not asked for"
+    ]
+   },
+   {
+    "genre": [
+     "P136",
+     "Irrelevant distractor: musical genre not asked for"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a choir": "choir(x)",
+   "with over 20 members": ">20 member count(x, n)"
+  }
+ },
+ {
+  "Question": "Give me a store that sells at least 2 different categories of items.",
+  "Unary": [
+   {
+    "store": [
+     "Q213441",
+     "Wikidata class for a shop/store; use as the target entity type"
+    ]
+   },
+   {
+    "item": [
+     "Q2424752",
+     "Optional typing for things sold (product/item)"
+    ]
+   },
+   {
+    "restaurant": [
+     "Q11707",
+     "Irrelevant distractor class (not needed for the question)"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Irrelevant distractor class (not needed for the question)"
+    ]
+   },
+   {
+    "type": [
+     "Q21146257",
+     "Manually added"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "sells_product": [
+     "P1056",
+     "Use 'product or material produced' as a Wikidata-supported proxy for items a store sells/offers"
+    ]
+   },
+   {
+    "instance_of": [
+     "P31",
+     "Connect a sold item/product to its category/type via 'instance of'"
+    ]
+   },
+   {
+    "subclass_of": [
+     "P279",
+     "Optional: allow categories to be generalized/grouped via subclass relations"
+    ]
+   },
+   {
+    "located_in": [
+     "P131",
+     "Irrelevant distractor relation (location is not asked)"
+    ]
+   },
+   {
+    "owned_by": [
+     "P127",
+     "Irrelevant distractor relation (ownership is not asked)"
+    ]
+   },
+   {
+    "official_website": [
+     "P856",
+     "Irrelevant distractor relation (website is not asked)"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a store": "store(x)",
+   "sells": "sells_product(x,y)",
+   "categories of items": "instance_of(y,c) (optionally: instance_of(y,c) \u2227 subclass_of(c,c2) to roll up categories)",
+   "at least 2 different categories": ">=2 DISTINCT c : exists y (sells_product(x,y) \u2227 instance_of(y,c))"
+  }
+ },
+ {
+  "Question": "Give me a character with more than 3 personality traits.",
+  "Unary": [
+   {
+    "fictional_character": [
+     "Q95074",
+     "Expresses 'a character' (interpreted as fictional character)"
+    ]
+   },
+   {
+    "personality_trait": [
+     "Q9415",
+     "Expresses 'personality trait' as the type of trait being counted"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Irrelevant distractor class (not required by the question)"
+    ]
+   },
+   {
+    "film": [
+     "Q11424",
+     "Irrelevant distractor class (not required by the question)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "has_characteristic": [
+     "P1552",
+     "Connects a character to their traits/characteristics (used for 'has personality traits')"
+    ]
+   },
+   {
+    "instance_of": [
+     "P31",
+     "Generic typing relation; can be used to enforce classes if needed (optional given Unary predicates)"
+    ]
+   },
+   {
+    "occupation": [
+     "P106",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "place_of_birth": [
+     "P19",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a character": "fictional_character(x)",
+   "with personality traits": "has_characteristic(x,t) \u2227 personality_trait(t)",
+   "more than 3 personality traits": ">3 has_characteristic(x,t) \u2227 personality_trait(t)"
+  }
+ },
+ {
+  "Question": "Give me a movie that has more than 12 actors.",
+  "Unary": [
+   {
+    "movie": [
+     "Q11424",
+     "Wikidata class for film/movie; captures 'a movie'"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Useful to type cast members as people (often true for actors)"
+    ]
+   },
+   {
+    "actor": [
+     "Q33999",
+     "Wikidata item for the occupation 'actor'; used to ensure cast members counted are actors"
+    ]
+   },
+   {
+    "book": [
+     "Q571",
+     "Irrelevant distractor class"
+    ]
+   },
+   {
+    "television series": [
+     "Q5398426",
+     "Irrelevant distractor class"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "cast member": [
+     "P161",
+     "Relates a film to its cast members; basis for 'has actors' and counting them"
+    ]
+   },
+   {
+    "occupation": [
+     "P106",
+     "Relates a person to their occupation; used to assert a cast member is an actor (occupation=actor)"
+    ]
+   },
+   {
+    "director": [
+     "P57",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "country of origin": [
+     "P495",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "genre": [
+     "P136",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a movie": "movie(x)",
+   "has more than 12 actors": ">12 y (cast member(x,y) AND occupation(y, actor))"
+  }
+ },
+ {
+  "Question": "Give me a diet that consists of more than 7 foods.",
+  "Unary": [
+   {
+    "diet": [
+     "Q1295219",
+     "Use the Wikidata class 'diet' to type the target entity x as a diet"
+    ]
+   },
+   {
+    "food": [
+     "Q2095",
+     "Use the Wikidata class 'food' to constrain the parts y to be foods"
+    ]
+   },
+   {
+    "human": [
+     "Q5",
+     "Irrelevant distractor class (not needed to answer the question)"
+    ]
+   },
+   {
+    "disease": [
+     "Q12136",
+     "Irrelevant distractor class (not needed to answer the question)"
+    ]
+   }
+  ],
+  "Binary": [
+   {
+    "has part": [
+     "P527",
+     "Express that a diet consists of items (parts/components), used to link a diet x to foods y"
+    ]
+   },
+   {
+    "has ingredient": [
+     "P186",
+     "Irrelevant distractor/nearby relation; could apply to recipes but is not required for 'diet consists of foods' here"
+    ]
+   },
+   {
+    "country of origin": [
+     "P495",
+     "Irrelevant distractor relation"
+    ]
+   },
+   {
+    "follows": [
+     "P155",
+     "Irrelevant distractor relation"
+    ]
+   }
+  ],
+  "Mapping": {
+   "a diet": "diet(x)",
+   "consists of foods": "\u2203y (has part(x,y) \u2227 food(y))",
+   "more than 7 foods": ">7 y (has part(x,y) \u2227 food(y))"
+  }
+ }
+]
