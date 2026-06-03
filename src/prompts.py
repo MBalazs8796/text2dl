@@ -22,16 +22,15 @@ def system_base(user_question, unary, binary, constants, query_type):
     Your task is transform queries from natural language to {query_type} queries.
     Translate it to {query_type} query in the form of a mapping.
     Use the unary and binary predicates alongside the constants defined above.
-    A term is either a variable or a constant. Variables can either be free or existentially quantified.
-    Binary predicates can be numerically quantified, to express this use the < sign for "less then", the > for the "more than" sign, le for the "less or equal" sign and ge for "greater or equal" sign.
+    A term is either a variable or a constant. Variables can either be free or existentially quantified (possibly with counting).
+    Binary predicates can be quantified with counting, to express this use the < sign for "less then", the > for the "more than" sign, le for the "less or equal" sign and ge for "greater or equal" sign.
     Each sign must be followed by a natural number and they must precede the relevant atom.
-    Note that in cases where the question contains statements such as "K different friends", you can use ge K friend(x,y), as relational signs imply that the elements involved are different.
-    If you need to use any logical sign, use it's English equivalent instead, for example "and" for \u2227 and "exists" for \u2203.
+    In cases where the question contains statements such as "(at least) K different friends", you can use ge K friend(x,y), as this kind of counting implies that the elements involved are different.
+    If you need to use any logical operator, use it's English equivalent instead, for example "and" for \u2227 and "exists" for \u2203.
     An atom is of the form A(t) where A is a unary predicate and t is a term or of the form A(t1, t2) where A is a binary predicate and t1 and t2 are terms.
     If you do not know how to translate parts of the user query, indicate this in the mapping.
-    In cases where additional assumptions need to be made.
-    For example in the case of a "large elephant" if you have no predicate or combination of predicates that without a doubt combines to "large" do not make an assumption based on external knowledge, instead map "large" to UNKNOWN.
-    "Which area", "What day", "Find a city", or "Who" should not be translated into predicates unless they add semantic constraints.
+    In cases where additional assumptions need to be made, for example, a "large elephant", if you have no predicate or combination of predicates that without a doubt combines to "large" do not make an assumption based on external knowledge, instead map "large" to UNKNOWN.
+    "Which area", "What day", "Find a city", or "Who" should not be translated into predicates.
     Instead, map the entity being asked for to the distinguished output variable ?x.
 
     #Format: 
