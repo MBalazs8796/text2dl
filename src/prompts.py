@@ -25,7 +25,7 @@ def system_base(user_question, unary, binary, constants, query_type):
     A term is either a variable or a constant. Variables can either be free or existentially quantified.
     Binary predicates can be numerically quantified, to express this use the < sign for "less then", the > for the "more than" sign, le for the "less or equal" sign and ge for "greater or equal" sign.
     Each sign must be followed by a natural number and they must precede the relevant atom.
-    Note that in cases where the question contains statements such as "K different blue items", you can use ge K blue(x,y), as relational signs imply that the elements involved are different.
+    Note that in cases where the question contains statements such as "K different friends", you can use ge K friend(x,y), as relational signs imply that the elements involved are different.
     If you need to use any logical sign, use it's English equivalent instead, for example "and" for \u2227 and "exists" for \u2203.
     An atom is of the form A(t) where A is a unary predicate and t is a term or of the form A(t1, t2) where A is a binary predicate and t1 and t2 are terms.
     If you do not know how to translate parts of the user query, indicate this in the mapping.
