@@ -30,8 +30,7 @@ def system_base(user_question, unary, binary, constants, query_type):
     An atom is of the form A(t) where A is a unary predicate and t is a term or of the form A(t1, t2) where A is a binary predicate and t1 and t2 are terms.
     If you do not know how to translate parts of the user query, indicate this in the mapping.
     In cases where additional assumptions need to be made, for example, a "large elephant", if you have no predicate or combination of predicates that without a doubt combines to "large" do not make an assumption based on external knowledge, instead map "large" to UNKNOWN.
-    "Which area", "What day", "Find a city", or "Who" should not be translated into predicates.
-    Instead, map the entity being asked for to the distinguished output variable ?x.
+    The questions you receive will start with "Give me", map this portion to the distinguished output variable ?x.
 
     #Format: 
     a mapping between relevant parts of the query and parts of the {query_type} query is in the form:

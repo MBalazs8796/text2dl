@@ -37,11 +37,11 @@ if __name__ == "__main__":
     args_parser.add_argument("--user_question", type=str, default="")
     args = args_parser.parse_args()
     random.seed(42)
-    with open('res_may.json','r',encoding='utf8') as fp:
+    with open('./prev_results/res_may.json','r',encoding='utf8') as fp:
        may = json.load(fp)
 
-    with open('res_may_ambig.json','r',encoding='utf8') as fp:
+    with open('./prev_results/res_may_ambig.json','r',encoding='utf8') as fp:
         may_ambig = json.load(fp)
-    compute_breakdown(may_ambig, 'res_ambig_latest')
+    compute_breakdown(may_ambig, 'ambigous_matches')
 
-    compute_breakdown(may, 'res_latest')
+    compute_breakdown(may, 'unambigous_matches')
