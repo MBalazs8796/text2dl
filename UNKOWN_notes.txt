@@ -1,0 +1,23 @@
+ambig:
+
+Polyglot gets mapped to know more than two languages. I am not sure if we want to consider that as a mistake.
+
+Unambig:
+
+Surprisingly the harder settings:
+
+has suffered is not mapped to significant_event
+
+original is not mapped to discoverer or inventor
+
+picked up not mapped to grapsing or taking with hand
+
+ice_cream, food_portion does not get mapped to scoops
+
+has_property, stained does not get mapped to unwashed 
+
+before gets mapped to UNKOWN but it is not relevant
+
+"kind" gets mapped to unkown
+
+(uncertainty about whether performer(dance,person) or performer(person,dance) is the intended argument order)\", UNKNOWN?

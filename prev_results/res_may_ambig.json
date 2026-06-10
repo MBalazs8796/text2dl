@@ -395,6 +395,12 @@
     ]
    },
    {
+    "discoverer or inventor": [
+     "P61",
+     "Manually added to represent original'"
+    ]
+   },
+   {
     "occupation": [
      "P106",
      "Used to link a person to the occupation 'author'"
@@ -523,6 +529,12 @@
     "book": [
      "Q571",
      "Irrelevant distractor type (still a Wikidata class)"
+    ]
+   },
+   {
+    "grapsing or taking with hand": [
+     "Q5597405",
+     "Manually added to represent picking up"
     ]
    }
   ],
@@ -958,13 +970,13 @@
     ]
    },
    {
-    "building_(irrelevant)": [
+    "building": [
      "Q41176",
      "Distractor; not needed to answer the question"
     ]
    },
    {
-    "fashion_(irrelevant)": [
+    "fashion": [
      "Q12684",
      "Distractor; related topic but not required"
     ]
@@ -990,13 +1002,13 @@
     ]
    },
    {
-    "made_of_(irrelevant)": [
+    "made_of": [
      "P186",
      "Distractor; material is not asked for"
     ]
    },
    {
-    "color_(irrelevant)": [
+    "color": [
      "P462",
      "Distractor; color is not asked for"
     ]

@@ -389,6 +389,12 @@
   ],
   "Binary": [
    {
+    "discoverer or inventor": [
+     "P61",
+     "Manually added to represent original'"
+    ]
+   },
+   {
     "instance_of": [
      "P31",
      "Used to assert that something (e.g., a character) is an instance of a class"
@@ -501,6 +507,12 @@
  {
   "Question": "Give me an object that has been picked up by less than 7 people.",
   "Unary": [
+   {
+    "grapsing or taking with hand": [
+     "Q5597405",
+     "Manually added to represent picking up"
+    ]
+   },
    {
     "physical object": [
      "Q223557",
@@ -958,13 +970,13 @@
     ]
    },
    {
-    "building_(irrelevant)": [
+    "building": [
      "Q41176",
      "Distractor; not needed to answer the question"
     ]
    },
    {
-    "fashion_(irrelevant)": [
+    "fashion": [
      "Q12684",
      "Distractor; related topic but not required"
     ]
@@ -990,13 +1002,13 @@
     ]
    },
    {
-    "made_of_(irrelevant)": [
+    "made_of": [
      "P186",
      "Distractor; material is not asked for"
     ]
    },
    {
-    "color_(irrelevant)": [
+    "color": [
      "P462",
      "Distractor; color is not asked for"
     ]
