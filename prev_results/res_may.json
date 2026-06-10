@@ -1023,9 +1023,9 @@
     ]
    },
    {
-    "dirty": [
-     "Q178091",
-     "Used as an approximation for 'unwashed' via a positive, expressible state/quality (unwashed \u2192 dirty/not clean)"
+    "stain": [
+     "Q97119922",
+     "Used as an approximation for 'unwashed' via a positive, expressible state/quality (unwashed \u2192 dirty/not clean). Manually added."
     ]
    },
    {
